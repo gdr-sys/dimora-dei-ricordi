@@ -4,10 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>La Dimora dei Ricordi — Foto & Video Matrimoni ed Eventi</title>
-  <meta name="description" content="Foto e video per matrimoni, eventi privati e cerimonie. Noemi e Francesco raccontano le vostre storie più belle. Pesaro-Urbino e Romagna." />
-  <meta property="og:title" content="La Dimora dei Ricordi — Foto & Video Eventi" />
-  <meta property="og:description" content="Foto e video per matrimoni ed eventi indimenticabili. Pesaro-Urbino e Romagna." />
-  <meta property="og:type" content="website" />
+  <meta name="description" content="Foto e video per matrimoni, eventi privati e cerimonie. Noemi e Francesco. Pesaro-Urbino e Romagna." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -15,159 +12,206 @@
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav id="navbar">
-    <a href="#hero" class="nav-logo">
-      <span class="logo-main">La Dimora dei Ricordi</span>
-      <span class="logo-sub">Foto &amp; Video Eventi</span>
-    </a>
-    <button class="nav-toggle" aria-label="Apri menu" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#about" onclick="closeMenu()">Chi siamo</a></li>
-      <li><a href="#servizi" onclick="closeMenu()">Servizi</a></li>
-      <li><a href="#portfolio" onclick="closeMenu()">Portfolio</a></li>
-      <li><a href="#pacchetti" onclick="closeMenu()">Pacchetti</a></li>
-      <li><a href="#contatti" onclick="closeMenu()" class="nav-cta">Contattaci</a></li>
-    </ul>
-  </nav>
+<!-- CURSORE PERSONALIZZATO -->
+<div id="cursor"></div>
+<div id="cursor-follower"></div>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-bg">
-      <div class="hero-photo"></div>
-      <div class="hero-overlay"></div>
-    </div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">📷 Pesaro-Urbino · Romagna · Italia</p>
-      <h1 class="hero-title">Ogni emozione<br /><em>merita di vivere<br />per sempre</em></h1>
-      <p class="hero-sub">Foto e video per matrimoni ed eventi indimenticabili</p>
-      <div class="hero-btns">
-        <a href="#portfolio" class="btn-primary">Guarda il portfolio</a>
-        <a href="https://wa.me/393271867329?text=Ciao!%20Ho%20visto%20il%20vostro%20sito%20e%20vorrei%20avere%20informazioni." target="_blank" rel="noopener" class="btn-whatsapp">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Scrivici su WhatsApp
-        </a>
-      </div>
-    </div>
-    <a href="#about" class="hero-scroll" aria-label="Scorri in basso">
-      <span class="scroll-line"></span>
-    </a>
-  </section>
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <span class="logo-main">La Dimora dei Ricordi</span>
+    <span class="logo-sub">Foto &amp; Video Eventi</span>
+  </a>
+  <button class="nav-toggle" aria-label="Apri menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about" onclick="closeMenu()">Chi siamo</a></li>
+    <li><a href="#servizi" onclick="closeMenu()">Servizi</a></li>
+    <li><a href="#portfolio" onclick="closeMenu()">Portfolio</a></li>
+    <li><a href="#pacchetti" onclick="closeMenu()">Pacchetti</a></li>
+    <li><a href="#recensioni" onclick="closeMenu()">Recensioni</a></li>
+    <li><a href="#contatti" onclick="closeMenu()" class="nav-cta">Contattaci</a></li>
+  </ul>
+</nav>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="about-inner">
-      <div class="about-photo-wrap">
-        <div class="about-photo"></div>
-        <div class="about-frame"></div>
-      </div>
-      <div class="about-text">
-        <p class="eyebrow">Chi siamo</p>
-        <h2>Noemi e Francesco,<br /><em>custodi dei vostri<br />ricordi più belli</em></h2>
-        <p>Siamo una coppia che condivide la stessa passione: raccontare le storie più belle attraverso immagini autentiche, emozionanti e senza tempo.</p>
-        <p>Lavoriamo discretamente, quasi invisibili, per catturare ciò che succede davvero — uno sguardo rubato, una risata, la luce di un pomeriggio d'estate. Ogni giorno che fotografiamo è unico, e lo trattiamo come tale.</p>
-        <div class="about-zone">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <span>Pesaro-Urbino · Romagna · disponibili in tutta Italia</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVIZI -->
-  <section id="servizi">
-    <div class="section-header">
-      <p class="eyebrow">I nostri servizi</p>
-      <h2>Cosa facciamo</h2>
-    </div>
-    <div class="servizi-grid">
-
-      <div class="servizio-card">
-        <div class="servizio-icon">💍</div>
-        <h3>Matrimoni</h3>
-        <p>Riprese e shooting fotografici per catturare ogni istante speciale del vostro giorno più bello. Dalla preparazione al lancio del bouquet, non perdiamo nulla.</p>
-        <ul>
-          <li>Copertura completa della giornata</li>
-          <li>Fotografia + video cinematografico</li>
-          <li>Gallery online privata</li>
-        </ul>
-      </div>
-
-      <div class="servizio-card featured">
-        <div class="servizio-icon">🎉</div>
-        <h3>Eventi Privati</h3>
-        <p>Compleanni, anniversari, feste: rendiamo unici i vostri momenti più importanti con uno stile naturale e coinvolgente.</p>
-        <ul>
-          <li>Reportage foto e video</li>
-          <li>Pacchetti su misura</li>
-          <li>Consegna rapida</li>
-        </ul>
-      </div>
-
-      <div class="servizio-card">
-        <div class="servizio-icon">🕊️</div>
-        <h3>Battesimi &amp; Comunioni</h3>
-        <p>Momenti di grazia e famiglia che meritano di essere ricordati con cura. Discrezione e rispetto dell'atmosfera sacra della cerimonia.</p>
-        <ul>
-          <li>Cerimonia in chiesa + ricevimento</li>
-          <li>Ritratti di famiglia</li>
-          <li>Album fotografico incluso</li>
-        </ul>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- PORTFOLIO -->
-  <section id="portfolio">
-    <div class="section-header">
-      <p class="eyebrow">Portfolio</p>
-      <h2>Le nostre storie</h2>
-      <p class="section-desc">Ogni foto è un frammento di emozione vera.</p>
-    </div>
-
-    <div class="port-tabs">
-      <button class="ptab active" onclick="filterPort('foto', this)">Fotografia</button>
-      <button class="ptab" onclick="filterPort('video', this)">Video</button>
-    </div>
-
-    <div class="port-grid" id="portGrid">
-      <!-- FOTO -->
-      <div class="pi wide foto"><div class="pimg pf1"></div><div class="pcap"><span>Matrimonio · Pesaro</span><span>2024</span></div></div>
-      <div class="pi foto"><div class="pimg pf2"></div><div class="pcap"><span>Evento · Rimini</span><span>2024</span></div></div>
-      <div class="pi foto"><div class="pimg pf3"></div><div class="pcap"><span>Matrimonio · Urbino</span><span>2024</span></div></div>
-      <div class="pi tall foto"><div class="pimg pf4"></div><div class="pcap"><span>Battesimo · Fano</span><span>2023</span></div></div>
-      <div class="pi foto"><div class="pimg pf5"></div><div class="pcap"><span>Matrimonio · Gabicce</span><span>2023</span></div></div>
-      <div class="pi foto"><div class="pimg pf6"></div><div class="pcap"><span>Comunione · Cesena</span><span>2023</span></div></div>
-      <!-- VIDEO -->
-      <div class="pi wide video hidden"><div class="pimg pv1 vthumb"><div class="play">▶</div><span class="vlabel">Film completo · 4:12</span></div><div class="pcap"><span>Matrimonio · Pesaro</span><span>2024</span></div></div>
-      <div class="pi video hidden"><div class="pimg pv2 vthumb"><div class="play">▶</div><span class="vlabel">Highlight · 2:30</span></div><div class="pcap"><span>Evento · Rimini</span><span>2024</span></div></div>
-      <div class="pi video hidden"><div class="pimg pv3 vthumb"><div class="play">▶</div><span class="vlabel">Teaser · 1:50</span></div><div class="pcap"><span>Matrimonio · Urbino</span><span>2023</span></div></div>
-    </div>
-
-    <div class="port-cta">
-      <p>Vuoi vedere altri scatti?</p>
-      <a href="https://www.instagram.com/dimora_dei_ricordi" target="_blank" rel="noopener" class="btn-outline">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
-        Seguici su Instagram
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg" id="heroBg">
+    <div class="hero-photo"></div>
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-content" data-parallax="0.3">
+    <p class="hero-eyebrow">📷 Pesaro-Urbino · Romagna · Italia</p>
+    <h1 class="hero-title">Ogni emozione<br /><em>merita di vivere<br />per sempre</em></h1>
+    <p class="hero-sub">Foto e video per matrimoni ed eventi indimenticabili</p>
+    <div class="hero-btns">
+      <a href="#portfolio" class="btn-primary">Guarda il portfolio</a>
+      <a href="https://wa.me/393271867329?text=Ciao!%20Ho%20visto%20il%20vostro%20sito%20e%20vorrei%20avere%20informazioni." target="_blank" rel="noopener" class="btn-whatsapp">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Scrivici su WhatsApp
       </a>
     </div>
-  </section>
+  </div>
+  <a href="#about" class="hero-scroll" aria-label="Scorri in basso">
+    <span class="scroll-line"></span>
+  </a>
+</section>
 
-  <!-- PACCHETTI -->
-  <section id="pacchetti">
-    <div class="section-header">
-      <p class="eyebrow">Pacchetti</p>
-      <h2>Scegli il vostro ricordo</h2>
-      <p class="section-desc">Prezzi per matrimoni ed eventi. Scriveteci per un preventivo su misura.</p>
+<!-- NUMERI ANIMATI -->
+<section id="numeri">
+  <div class="numeri-grid">
+    <div class="numero-item">
+      <span class="numero-val" data-target="150">0</span>
+      <span class="numero-label">Matrimoni</span>
     </div>
+    <div class="numero-sep"></div>
+    <div class="numero-item">
+      <span class="numero-val" data-target="8">0</span>
+      <span class="numero-label">Anni di esperienza</span>
+    </div>
+    <div class="numero-sep"></div>
+    <div class="numero-item">
+      <span class="numero-val" data-target="300">0</span>
+      <span class="numero-label">Famiglie felici</span>
+    </div>
+    <div class="numero-sep"></div>
+    <div class="numero-item">
+      <span class="numero-val" data-target="5">0</span>
+      <span class="numero-label">Regioni coperte</span>
+    </div>
+  </div>
+</section>
 
-    <div class="pack-grid">
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-photo-wrap">
+      <div class="about-photo"></div>
+      <div class="about-frame"></div>
+    </div>
+    <div class="about-text">
+      <p class="eyebrow">Chi siamo</p>
+      <h2>Noemi e Francesco,<br /><em>custodi dei vostri<br />ricordi più belli</em></h2>
+      <p>Siamo una coppia che condivide la stessa passione: raccontare le storie più belle attraverso immagini autentiche, emozionanti e senza tempo.</p>
+      <p>Lavoriamo discretamente, quasi invisibili, per catturare ciò che succede davvero — uno sguardo rubato, una risata, la luce di un pomeriggio d'estate.</p>
+      <div class="about-zone">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Pesaro-Urbino · Romagna · disponibili in tutta Italia</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <div class="pack-card">
-        <div class="pack-icon">📷</div>
+<!-- SERVIZI -->
+<section id="servizi">
+  <div class="section-header">
+    <p class="eyebrow">I nostri servizi</p>
+    <h2>Cosa facciamo</h2>
+  </div>
+  <div class="servizi-grid">
+    <div class="servizio-card">
+      <div class="servizio-img si1"></div>
+      <div class="servizio-body">
+        <h3>💍 Matrimoni</h3>
+        <p>Dalla preparazione al lancio del bouquet, ogni momento del vostro giorno più bello catturato con discrezione e stile.</p>
+        <ul><li>Copertura completa</li><li>Foto + video cinematografico</li><li>Sessione sposi esterna</li></ul>
+      </div>
+    </div>
+    <div class="servizio-card featured">
+      <div class="servizio-img si2"></div>
+      <div class="servizio-body">
+        <h3>🎉 Eventi Privati</h3>
+        <p>Compleanni, anniversari, feste: rendiamo unici i vostri momenti più importanti con uno stile naturale e coinvolgente.</p>
+        <ul><li>Reportage foto e video</li><li>Pacchetti su misura</li><li>Consegna rapida</li></ul>
+      </div>
+    </div>
+    <div class="servizio-card">
+      <div class="servizio-img si3"></div>
+      <div class="servizio-body">
+        <h3>🕊️ Battesimi &amp; Comunioni</h3>
+        <p>Momenti di grazia e famiglia. Lavoriamo con discrezione e rispetto dell'atmosfera sacra della cerimonia.</p>
+        <ul><li>Cerimonia + ricevimento</li><li>Ritratti di famiglia</li><li>Album fotografico</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-header">
+    <p class="eyebrow">Portfolio</p>
+    <h2>Le nostre storie</h2>
+    <p class="section-desc">Ogni foto è un frammento di emozione vera.</p>
+  </div>
+  <div class="port-tabs">
+    <button class="ptab active" onclick="filterPort('foto', this)">Fotografia</button>
+    <button class="ptab" onclick="filterPort('video', this)">Video</button>
+  </div>
+  <div class="port-grid" id="portGrid">
+    <div class="pi wide foto"><div class="pimg pf1"></div><div class="pcap"><span>Matrimonio · Pesaro</span><span>2024</span></div></div>
+    <div class="pi foto"><div class="pimg pf2"></div><div class="pcap"><span>Evento · Rimini</span><span>2024</span></div></div>
+    <div class="pi foto"><div class="pimg pf3"></div><div class="pcap"><span>Matrimonio · Urbino</span><span>2024</span></div></div>
+    <div class="pi tall foto"><div class="pimg pf4"></div><div class="pcap"><span>Battesimo · Fano</span><span>2023</span></div></div>
+    <div class="pi foto"><div class="pimg pf5"></div><div class="pcap"><span>Matrimonio · Gabicce</span><span>2023</span></div></div>
+    <div class="pi foto"><div class="pimg pf6"></div><div class="pcap"><span>Comunione · Cesena</span><span>2023</span></div></div>
+    <!-- VIDEO YOUTUBE
+         Sostituisci YOUTUBE_ID con l'ID del video (es. dQw4w9WgXcQ)
+         L'ID è la parte dopo ?v= nell'URL di YouTube -->
+    <div class="pi wide video hidden" data-cat="video">
+      <div class="yt-wrap">
+        <iframe src="https://www.youtube.com/embed/YOUTUBE_ID_1?rel=0&modestbranding=1"
+          title="Matrimonio · Pesaro 2024" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="pcap"><span>Matrimonio · Pesaro</span><span>2024</span></div>
+    </div>
+    <div class="pi video hidden" data-cat="video">
+      <div class="yt-wrap">
+        <iframe src="https://www.youtube.com/embed/YOUTUBE_ID_2?rel=0&modestbranding=1"
+          title="Evento · Rimini 2024" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="pcap"><span>Evento · Rimini</span><span>2024</span></div>
+    </div>
+    <div class="pi video hidden" data-cat="video">
+      <div class="yt-wrap">
+        <iframe src="https://www.youtube.com/embed/YOUTUBE_ID_3?rel=0&modestbranding=1"
+          title="Matrimonio · Urbino 2023" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="pcap"><span>Matrimonio · Urbino</span><span>2023</span></div>
+    </div>
+  </div>
+  <div class="port-cta">
+    <p>Vuoi vedere altri scatti?</p>
+    <a href="https://www.instagram.com/dimora_dei_ricordi" target="_blank" rel="noopener" class="btn-outline">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+      Seguici su Instagram
+    </a>
+  </div>
+</section>
+
+<!-- PACCHETTI -->
+<section id="pacchetti">
+  <div class="section-header">
+    <p class="eyebrow">Pacchetti</p>
+    <h2>Scegli il vostro ricordo</h2>
+    <p class="section-desc">Scriveteci per un preventivo su misura.</p>
+  </div>
+
+  <div class="pack-grid">
+
+    <div class="pack-card">
+      <div class="pack-img pack-img-foto">
+        <div class="pack-img-overlay">
+          <span class="pack-img-label">Solo Foto</span>
+        </div>
+      </div>
+      <div class="pack-body">
         <p class="pack-name">Solo Foto</p>
         <p class="pack-price"><strong>800€</strong></p>
         <ul class="pack-features">
@@ -175,13 +219,19 @@
           <li>2 fotografi</li>
           <li>Sessione sposi in location esterna</li>
           <li>Foto originali in HD senza loghi</li>
-          <li>+ Fotolibro grande disponibile (+400€)</li>
+          <li>+ Fotolibro grande (+400€)</li>
         </ul>
         <a href="#contatti" class="btn-outline-dark">Richiedi info</a>
       </div>
+    </div>
 
-      <div class="pack-card">
-        <div class="pack-icon">🎬</div>
+    <div class="pack-card">
+      <div class="pack-img pack-img-video">
+        <div class="pack-img-overlay">
+          <span class="pack-img-label">Solo Video</span>
+        </div>
+      </div>
+      <div class="pack-body">
         <p class="pack-name">Solo Video</p>
         <p class="pack-price"><strong>850€</strong></p>
         <ul class="pack-features">
@@ -193,10 +243,16 @@
         </ul>
         <a href="#contatti" class="btn-outline-dark">Richiedi info</a>
       </div>
+    </div>
 
-      <div class="pack-card featured">
-        <p class="pack-badge">Più scelto</p>
-        <div class="pack-icon">✨</div>
+    <div class="pack-card featured">
+      <div class="pack-badge-wrap"><span class="pack-badge">✨ Più scelto</span></div>
+      <div class="pack-img pack-img-combo">
+        <div class="pack-img-overlay">
+          <span class="pack-img-label">Foto + Video</span>
+        </div>
+      </div>
+      <div class="pack-body">
         <p class="pack-name">Foto + Video</p>
         <p class="pack-price"><strong>1.450€</strong></p>
         <ul class="pack-features">
@@ -205,168 +261,190 @@
           <li>Foto originali in HD senza loghi</li>
           <li>Trailer (2–3 min) + video (8–12 min)</li>
           <li>Sessione sposi in location esterna</li>
-          <li>Consegna foto e video in Full HD</li>
-          <li>+ Fotolibro grande disponibile (+400€)</li>
-          <li>+ 3° collaboratore disponibile (+200€)</li>
+          <li>+ Fotolibro grande (+400€)</li>
+          <li>+ 3° collaboratore (+200€)</li>
         </ul>
         <a href="#contatti" class="btn-primary-dark">Richiedi info</a>
       </div>
+    </div>
+
+  </div>
+
+  <div class="extras-wrap">
+    <p class="extras-title">Aggiunte opzionali</p>
+    <div class="extras-grid">
+      <div class="extra-item"><span class="extra-name">Album Foto 40×30</span><span class="extra-desc">40 pagine, scatola in cuoio bianco</span><span class="extra-price">400€</span></div>
+      <div class="extra-item"><span class="extra-name">Album Genitori 28×19</span><span class="extra-desc">2 album da 40 pag., rilegatura layflat</span><span class="extra-price">250€</span></div>
+      <div class="extra-item"><span class="extra-name">Scatola in Legno + USB</span><span class="extra-desc">Consegna digitale personalizzata</span><span class="extra-price">70€</span></div>
+      <div class="extra-item"><span class="extra-name">Foto Istantanee Instax</span><span class="extra-desc">100 foto 150€ · 150 foto 200€ · 200 foto 250€</span><span class="extra-price">da 150€</span></div>
+      <div class="extra-item"><span class="extra-name">Stampa 10×15 in loco</span><span class="extra-desc">50 foto 180€ · 100 foto 280€</span><span class="extra-price">da 180€</span></div>
+      <div class="extra-item highlight"><span class="extra-name">Cornice Personalizzabile</span><span class="extra-desc">In prestito gratuito per il vostro evento</span><span class="extra-price">Gratis 🎁</span></div>
+    </div>
+  </div>
+  <p class="pack-note">Per eventi privati, battesimi e comunioni scriveteci per un preventivo personalizzato.</p>
+</section>
+
+<!-- RECENSIONI -->
+<section id="recensioni">
+  <div class="section-header">
+    <p class="eyebrow">Recensioni</p>
+    <h2>Cosa dicono di noi</h2>
+    <p class="section-desc">Le parole di chi ha vissuto il nostro lavoro.</p>
+  </div>
+
+  <div class="rec-carousel-wrap">
+    <div class="rec-track" id="recTrack">
+
+      <!-- ✏️ AGGIUNGI O MODIFICA LE RECENSIONI QUI SOTTO -->
+      <!-- Per la foto: metti l'immagine nella cartella /foto/ e cambia il src -->
+      <!-- Se non hai la foto, lascia il div .rec-avatar-placeholder -->
+
+      <div class="rec-card">
+        <div class="rec-header">
+          <div class="rec-avatar-wrap">
+            <!-- Con foto: <img src="foto/sofia-marco.jpg" alt="Sofia e Marco" class="rec-avatar" /> -->
+            <div class="rec-avatar-placeholder">SM</div>
+          </div>
+          <div class="rec-info">
+            <p class="rec-nome">Sofia &amp; Marco</p>
+            <p class="rec-tipo">Matrimonio · Pesaro 2024</p>
+            <div class="rec-stelle">★★★★★</div>
+          </div>
+        </div>
+        <p class="rec-testo">«Noemi e Francesco sono stati straordinari. Discreti, professionali e con un occhio per i dettagli che ci ha lasciato senza parole. Le foto raccontano esattamente com'era quella giornata — emozioni vere, momenti che pensavamo fossero passati inosservati. Non potevamo scegliere meglio.»</p>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-header">
+          <div class="rec-avatar-wrap">
+            <div class="rec-avatar-placeholder">GL</div>
+          </div>
+          <div class="rec-info">
+            <p class="rec-nome">Giulia &amp; Luca</p>
+            <p class="rec-tipo">Matrimonio · Urbino 2024</p>
+            <div class="rec-stelle">★★★★★</div>
+          </div>
+        </div>
+        <p class="rec-testo">«Il video del nostro matrimonio ci fa piangere ogni volta che lo rivediamo. Hanno catturato la magia di quel giorno in modo che non avremmo mai immaginato. Il drone poi è stato uno spettacolo — le riprese della location erano da film. Consigliatissimi!»</p>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-header">
+          <div class="rec-avatar-wrap">
+            <div class="rec-avatar-placeholder">AR</div>
+          </div>
+          <div class="rec-info">
+            <p class="rec-nome">Anna Rossi</p>
+            <p class="rec-tipo">Battesimo · Fano 2024</p>
+            <div class="rec-stelle">★★★★★</div>
+          </div>
+        </div>
+        <p class="rec-testo">«Avevo scelto La Dimora dei Ricordi per il battesimo di mia figlia e sono rimasta incantata. Si sono mossi nella chiesa senza disturbare nessuno, eppure hanno preso ogni momento importante. Le foto di famiglia sono bellissime. Tornerò sicuramente per altri eventi!»</p>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-header">
+          <div class="rec-avatar-wrap">
+            <div class="rec-avatar-placeholder">FC</div>
+          </div>
+          <div class="rec-info">
+            <p class="rec-nome">Federica &amp; Carlo</p>
+            <p class="rec-tipo">Matrimonio · Gabicce 2023</p>
+            <div class="rec-stelle">★★★★★</div>
+          </div>
+        </div>
+        <p class="rec-testo">«Professionali, puntuali e super disponibili fin dal primo contatto. Il pacchetto foto + video è stato perfetto per noi. Le foto istantanee durante il ricevimento sono state amatissime dagli ospiti — tutti le volevano! Un'esperienza bellissima dall'inizio alla fine.»</p>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-header">
+          <div class="rec-avatar-wrap">
+            <div class="rec-avatar-placeholder">MT</div>
+          </div>
+          <div class="rec-info">
+            <p class="rec-nome">Martina Tonelli</p>
+            <p class="rec-tipo">Compleanno · Rimini 2023</p>
+            <div class="rec-stelle">★★★★★</div>
+          </div>
+        </div>
+        <p class="rec-testo">«Ho scelto La Dimora dei Ricordi per i miei 40 anni e non me ne sono pentita. Francesco ha fotografato tutta la serata con naturalezza, nessuno si è sentito messo in posa. Le foto sono arrivate in tempi rapidissimi e sono splendide. Grazie mille!»</p>
+      </div>
 
     </div>
 
-    <!-- EXTRA -->
-    <div class="extras-wrap">
-      <p class="extras-title">Aggiunte opzionali</p>
-      <div class="extras-grid">
-        <div class="extra-item">
-          <span class="extra-name">Album Foto 40×30</span>
-          <span class="extra-desc">40 pagine, scatola in cuoio bianco</span>
-          <span class="extra-price">400€</span>
-        </div>
-        <div class="extra-item">
-          <span class="extra-name">Album Genitori 28×19</span>
-          <span class="extra-desc">2 album da 40 pag., rilegatura layflat</span>
-          <span class="extra-price">250€</span>
-        </div>
-        <div class="extra-item">
-          <span class="extra-name">Scatola in Legno + USB</span>
-          <span class="extra-desc">Consegna digitale personalizzata</span>
-          <span class="extra-price">70€</span>
-        </div>
-        <div class="extra-item">
-          <span class="extra-name">Foto Istantanee Instax</span>
-          <span class="extra-desc">100 foto 150€ · 150 foto 200€ · 200 foto 250€</span>
-          <span class="extra-price">da 150€</span>
-        </div>
-        <div class="extra-item">
-          <span class="extra-name">Stampa 10×15 in loco</span>
-          <span class="extra-desc">50 foto 180€ · 100 foto 280€</span>
-          <span class="extra-price">da 180€</span>
-        </div>
-        <div class="extra-item highlight">
-          <span class="extra-name">Cornice Personalizzabile</span>
-          <span class="extra-desc">In prestito gratuito per il vostro evento</span>
-          <span class="extra-price">Gratis 🎁</span>
-        </div>
+    <!-- Indicatori -->
+    <div class="rec-dots" id="recDots"></div>
+
+    <!-- Frecce manuali -->
+    <button class="rec-arrow rec-prev" onclick="moveCarousel(-1)" aria-label="Precedente">‹</button>
+    <button class="rec-arrow rec-next" onclick="moveCarousel(1)" aria-label="Successivo">›</button>
+  </div>
+</section>
+
+<!-- CONTATTI -->
+<section id="contatti">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <p class="eyebrow">Contatti</p>
+      <h2>Parliamo del<br /><em>vostro giorno speciale</em></h2>
+      <p>Rispondiamo entro 24 ore. Per date ravvicinate, scriveteci direttamente su WhatsApp.</p>
+      <a href="https://wa.me/393271867329?text=Ciao!%20Ho%20visto%20il%20vostro%20sito%20e%20vorrei%20avere%20informazioni." target="_blank" rel="noopener" class="whatsapp-big">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Scrivici su WhatsApp
+      </a>
+      <div class="contact-links">
+        <a href="mailto:ladimoradeiricordi@libero.it" class="clink"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>ladimoradeiricordi@libero.it</a>
+        <a href="tel:+393271867329" class="clink"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.45 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.09 6.09l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+39 327 186 7329 (Francesco)</a>
+        <a href="tel:+393484382964" class="clink"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.45 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.09 6.09l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+39 348 438 2964 (Noemi)</a>
+        <a href="https://www.instagram.com/dimora_dei_ricordi" target="_blank" rel="noopener" class="clink"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>@dimora_dei_ricordi</a>
+        <a href="https://www.youtube.com/@ladimoradeiricordi" target="_blank" rel="noopener" class="clink"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>La dimora dei ricordi (YouTube)</a>
+        <a href="https://www.matrimonio.com/fotografo-matrimonio/la-dimora-dei-ricordi--e366624" target="_blank" rel="noopener" class="clink"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Matrimonio.com</a>
       </div>
     </div>
-
-    <p class="pack-note">Per eventi privati, battesimi e comunioni scriveteci per un preventivo personalizzato.</p>
-  </section>
-
-  <!-- CONTATTI -->
-  <section id="contatti">
-    <div class="contact-inner">
-      <div class="contact-info">
-        <p class="eyebrow">Contatti</p>
-        <h2>Parliamo del<br /><em>vostro giorno speciale</em></h2>
-        <p>Rispondiamo entro 24 ore. Per date ravvicinate, scriveteci direttamente su WhatsApp.</p>
-
-        <a href="https://wa.me/393271867329?text=Ciao!%20Ho%20visto%20il%20vostro%20sito%20e%20vorrei%20avere%20informazioni." target="_blank" rel="noopener" class="whatsapp-big">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Scrivici su WhatsApp
-        </a>
-
-        <div class="contact-links">
-          <a href="mailto:ladimoradeiricordi@libero.it" class="clink">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            ladimoradeiricordi@libero.it
-          </a>
-          <a href="tel:+393271867329" class="clink">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.45 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.09 6.09l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            +39 327 186 7329 (Francesco)
-          </a>
-          <a href="tel:+393484382964" class="clink">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.45 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.09 6.09l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            +39 348 438 2964 (Noemi)
-          </a>
-          <a href="https://www.instagram.com/dimora_dei_ricordi" target="_blank" rel="noopener" class="clink">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
-            @dimora_dei_ricordi
-          </a>
-          <a href="https://www.youtube.com/@ladimoradeiricordi" target="_blank" rel="noopener" class="clink">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
-            La dimora dei ricordi (YouTube)
-          </a>
-          <a href="https://www.matrimonio.com/fotografo-matrimonio/la-dimora-dei-ricordi--e366624" target="_blank" rel="noopener" class="clink">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-            Matrimonio.com
-          </a>
-        </div>
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <div class="frow">
+        <div class="fg"><label for="nome">Nome e cognome</label><input type="text" id="nome" name="nome" placeholder="Marco e Sofia" required /></div>
+        <div class="fg"><label for="email">La tua email</label><input type="email" id="email" name="email" placeholder="voi@email.it" required /></div>
       </div>
+      <div class="frow">
+        <div class="fg">
+          <label for="tipo">Tipo di evento</label>
+          <select id="tipo" name="tipo">
+            <option value="">— seleziona —</option>
+            <option>Matrimonio</option><option>Evento privato</option>
+            <option>Battesimo</option><option>Comunione</option><option>Altro</option>
+          </select>
+        </div>
+        <div class="fg"><label for="data">Data dell'evento</label><input type="date" id="data" name="data" /></div>
+      </div>
+      <div class="fg full"><label for="messaggio">Raccontateci il vostro evento</label><textarea id="messaggio" name="messaggio" rows="4" placeholder="Dove? Quante persone? Ogni dettaglio conta…"></textarea></div>
+      <button type="submit" class="btn-submit">Invia il messaggio</button>
+      <p class="fsuccess hidden" id="fsuccess">✓ Messaggio inviato! Vi risponderemo entro 24 ore.</p>
+    </form>
+  </div>
+</section>
 
-      <form class="contact-form" onsubmit="handleSubmit(event)">
-        <div class="frow">
-          <div class="fg">
-            <label for="nome">Nome e cognome</label>
-            <input type="text" id="nome" name="nome" placeholder="Marco e Sofia" required />
-          </div>
-          <div class="fg">
-            <label for="email">La tua email</label>
-            <!-- ✏️ IL FORM INVIA A QUESTA EMAIL — CAMBIALA CON LA TUA -->
-            <input type="email" id="email" name="email" placeholder="voi@email.it" required />
-          </div>
-        </div>
-        <div class="frow">
-          <div class="fg">
-            <label for="tipo">Tipo di evento</label>
-            <select id="tipo" name="tipo">
-              <option value="">— seleziona —</option>
-              <option>Matrimonio</option>
-              <option>Evento privato</option>
-              <option>Battesimo</option>
-              <option>Comunione</option>
-              <option>Altro</option>
-            </select>
-          </div>
-          <div class="fg">
-            <label for="data">Data dell'evento</label>
-            <input type="date" id="data" name="data" />
-          </div>
-        </div>
-        <div class="fg full">
-          <label for="messaggio">Raccontateci il vostro evento</label>
-          <textarea id="messaggio" name="messaggio" rows="4" placeholder="Dove? Quante persone? Ogni dettaglio ci aiuta a capire cosa fa al caso vostro…"></textarea>
-        </div>
-        <button type="submit" class="btn-submit">Invia il messaggio</button>
-        <p class="fsuccess hidden" id="fsuccess">✓ Messaggio inviato! Vi risponderemo entro 24 ore.</p>
-      </form>
-
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <p class="footer-logo">La Dimora dei Ricordi</p>
+      <p class="footer-tagline">Foto &amp; Video Eventi</p>
     </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <p class="footer-logo">La Dimora dei Ricordi</p>
-        <p class="footer-tagline">Foto &amp; Video Eventi</p>
-      </div>
-      <nav class="footer-nav">
-        <a href="#about">Chi siamo</a>
-        <a href="#servizi">Servizi</a>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#pacchetti">Pacchetti</a>
-        <a href="#contatti">Contatti</a>
-      </nav>
-      <div class="footer-social">
-        <a href="https://www.instagram.com/dimora_dei_ricordi" target="_blank" rel="noopener" aria-label="Instagram">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
-        </a>
-        <a href="https://www.youtube.com/@ladimoradeiricordi" target="_blank" rel="noopener" aria-label="YouTube">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
-        </a>
-        <a href="https://wa.me/393271867329" target="_blank" rel="noopener" aria-label="WhatsApp">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        </a>
-        <a href="https://www.matrimonio.com/fotografo-matrimonio/la-dimora-dei-ricordi--e366624" target="_blank" rel="noopener" aria-label="Matrimonio.com">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        </a>
-      </div>
+    <nav class="footer-nav">
+      <a href="#about">Chi siamo</a><a href="#servizi">Servizi</a>
+      <a href="#portfolio">Portfolio</a><a href="#pacchetti">Pacchetti</a><a href="#recensioni">Recensioni</a><a href="#contatti">Contatti</a>
+    </nav>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/dimora_dei_ricordi" target="_blank" rel="noopener" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
+      <a href="https://www.youtube.com/@ladimoradeiricordi" target="_blank" rel="noopener" aria-label="YouTube"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg></a>
+      <a href="https://wa.me/393271867329" target="_blank" rel="noopener" aria-label="WhatsApp"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+      <a href="https://www.matrimonio.com/fotografo-matrimonio/la-dimora-dei-ricordi--e366624" target="_blank" rel="noopener" aria-label="Matrimonio.com"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>
     </div>
-    <p class="footer-copy">© 2025 La Dimora dei Ricordi · Noemi &amp; Francesco · Pesaro-Urbino · <a href="#">Privacy Policy</a></p>
-  </footer>
+  </div>
+  <p class="footer-copy">© 2025 La Dimora dei Ricordi · Noemi &amp; Francesco · Pesaro-Urbino · <a href="#">Privacy Policy</a></p>
+</footer>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
