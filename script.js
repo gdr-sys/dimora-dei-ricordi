@@ -241,3 +241,11 @@ function moveCarousel(dir) {
   track.style.transform = `translateX(-${current * perView * cardWidth}px)`;
   dots.forEach((d, i) => d.classList.toggle('active', i === current));
 }
+
+// ============================================================
+// TORNA SU
+// ============================================================
+const backTop = document.getElementById('backTop');
+window.addEventListener('scroll', () => {
+  backTop.classList.toggle('visible', window.scrollY > 400);
+}, { passive: true });
