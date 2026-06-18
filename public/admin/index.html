@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — La Dimora dei Ricordi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:      #F5F3F0;
+      --white:   #FFFFFF;
+      --brown:   #2C1F14;
+      --rose:    #C4967A;
+      --rose-dk: #A67860;
+      --gray:    #8A7A6E;
+      --border:  #E0D8D0;
+      --green:   #4CAF50;
+      --red:     #E57373;
+      --font:    'Jost', system-ui, sans-serif;
+      --display: 'Cormorant Garamond', serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); background: var(--bg); color: var(--brown); min-height: 100vh; }
+
+    /* ── LOGIN ── */
+    #loginScreen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--brown);
+    }
+    .login-box {
+      background: var(--white);
+      padding: 3rem 2.5rem;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+    }
+    .login-logo {
+      font-family: var(--display);
+      font-size: 1.6rem;
+      font-weight: 300;
+      margin-bottom: 0.3rem;
+    }
+    .login-sub {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 2.5rem;
+    }
+    .login-box input[type="password"] {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--border);
+      font-family: var(--font);
+      font-size: 1rem;
+      outline: none;
+      margin-bottom: 1rem;
+      transition: border-color 0.3s;
+    }
+    .login-box input:focus { border-color: var(--rose); }
+    .login-error { color: var(--red); font-size: 0.82rem; margin-bottom: 0.8rem; display: none; }
+
+    /* ── LAYOUT ADMIN ── */
+    #adminApp { display: none; min-height: 100vh; }
+
+    .admin-header {
+      background: var(--brown);
+      color: white;
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .admin-header-logo {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
+    .admin-header-logo span {
+      font-family: var(--font);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-left: 1rem;
+    }
+    .btn-logout {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.7);
+      padding: 0.4rem 1rem;
+      font-family: var(--font);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-logout:hover { border-color: var(--rose); color: var(--rose); }
+
+    .admin-body { display: flex; min-height: calc(100vh - 60px); }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background: var(--white);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem 0;
+      flex-shrink: 0;
+    }
+    .sidebar-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray);
+      padding: 0 1.5rem;
+      margin-bottom: 0.5rem;
+      margin-top: 1.2rem;
+    }
+    .sidebar-label:first-child { margin-top: 0; }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.7rem 1.5rem;
+      font-size: 0.88rem;
+      color: var(--brown);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      border-left: 3px solid transparent;
+    }
+    .nav-item:hover { background: var(--bg); }
+    .nav-item.active { background: #fdf5f0; border-left-color: var(--rose); color: var(--rose-dk); font-weight: 500; }
+    .nav-icon { font-size: 1.1rem; width: 22px; text-align: center; }
+
+    /* Content area */
+    .content { flex: 1; padding: 2rem; overflow-y: auto; }
+
+    /* Pannelli */
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    .panel-title {
+      font-family: var(--display);
+      font-size: 2rem;
+      font-weight: 300;
+      margin-bottom: 0.3rem;
+    }
+    .panel-sub { color: var(--gray); font-size: 0.88rem; margin-bottom: 2rem; }
+
+    /* Cards */
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .card-title {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Form elements */
+    .form-group { margin-bottom: 1.1rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 0.35rem;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      border: 1px solid var(--border);
+      font-family: var(--font);
+      font-size: 0.92rem;
+      color: var(--brown);
+      outline: none;
+      transition: border-color 0.3s;
+      background: var(--white);
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--rose); }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    /* Buttons */
+    .btn {
+      padding: 0.7rem 1.6rem;
+      font-family: var(--font);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: var(--rose); color: white; }
+    .btn-primary:hover { background: var(--rose-dk); }
+    .btn-danger { background: var(--red); color: white; font-size: 0.72rem; padding: 0.4rem 0.9rem; }
+    .btn-danger:hover { filter: brightness(0.9); }
+    .btn-sm { padding: 0.4rem 0.9rem; font-size: 0.72rem; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* Toast */
+    #toast {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      padding: 0.9rem 1.5rem;
+      background: var(--brown);
+      color: white;
+      font-size: 0.85rem;
+      z-index: 9999;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s;
+      pointer-events: none;
+    }
+    #toast.show { transform: translateY(0); opacity: 1; }
+    #toast.success { background: var(--green); }
+    #toast.error { background: var(--red); }
+
+    /* ── SEZIONE FOTO ── */
+    .upload-zone {
+      border: 2px dashed var(--border);
+      padding: 2.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.3s, background 0.3s;
+      margin-bottom: 1.5rem;
+    }
+    .upload-zone:hover, .upload-zone.dragover {
+      border-color: var(--rose);
+      background: #fdf5f0;
+    }
+    .upload-zone input { display: none; }
+    .upload-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+    .upload-text { font-size: 0.88rem; color: var(--gray); }
+    .upload-text strong { color: var(--rose); }
+
+    .upload-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .foto-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+    .foto-item {
+      position: relative;
+      aspect-ratio: 1;
+      overflow: hidden;
+      background: var(--bg);
+      border: 1px solid var(--border);
+    }
+    .foto-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .foto-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(44,31,20,0.7);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.8rem;
+    }
+    .foto-item:hover .foto-item-overlay { opacity: 1; }
+    .foto-item-caption {
+      font-size: 0.7rem;
+      color: white;
+      text-align: center;
+      word-break: break-word;
+    }
+    .foto-item-badge {
+      position: absolute;
+      top: 0.5rem; left: 0.5rem;
+      background: var(--rose);
+      color: white;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+    }
+    .foto-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--border);
+    }
+
+    /* Progress bar upload */
+    .upload-progress {
+      display: none;
+      margin-top: 1rem;
+    }
+    .upload-progress.show { display: block; }
+    .progress-bar {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--rose);
+      transition: width 0.3s;
+      width: 0%;
+    }
+    .progress-text { font-size: 0.78rem; color: var(--gray); margin-top: 0.4rem; }
+
+    /* ── PACCHETTI EDITOR ── */
+    .pacchetto-editor {
+      border: 1px solid var(--border);
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+      position: relative;
+      background: var(--white);
+    }
+    .pacchetto-editor.evidenziato { border-color: var(--rose); background: #fdf5f0; }
+    .pacchetto-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .pacchetto-nome { font-weight: 500; font-size: 1rem; }
+    .features-list { margin-top: 0.8rem; }
+    .feature-item {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      margin-bottom: 0.4rem;
+    }
+    .feature-item input { flex: 1; }
+    .btn-add-feature {
+      background: none;
+      border: 1px dashed var(--border);
+      color: var(--gray);
+      padding: 0.4rem 1rem;
+      font-size: 0.78rem;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 0.5rem;
+      transition: all 0.2s;
+    }
+    .btn-add-feature:hover { border-color: var(--rose); color: var(--rose); }
+
+    /* ── EXTRAS EDITOR ── */
+    .extra-editor {
+      display: grid;
+      grid-template-columns: 2fr 3fr 1fr auto;
+      gap: 0.6rem;
+      align-items: end;
+      margin-bottom: 0.6rem;
+    }
+
+    /* ── STATS ── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 1.2rem 1.5rem;
+    }
+    .stat-val {
+      font-family: var(--display);
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--rose);
+      line-height: 1;
+    }
+    .stat-lbl { font-size: 0.75rem; color: var(--gray); margin-top: 0.3rem; letter-spacing: 0.06em; }
+
+    .link-sito {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      color: var(--rose);
+      border: 1px solid var(--rose);
+      padding: 0.4rem 1rem;
+      margin-bottom: 2rem;
+      transition: all 0.2s;
+    }
+    .link-sito:hover { background: var(--rose); color: white; }
+
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+      .upload-meta { grid-template-columns: 1fr; }
+      .extra-editor { grid-template-columns: 1fr 1fr; }
+      .stats-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div id="loginScreen">
+  <div class="login-box">
+    <p class="login-logo">La Dimora dei Ricordi</p>
+    <p class="login-sub">Pannello di gestione</p>
+    <p class="login-error" id="loginError">Password errata. Riprova.</p>
+    <input type="password" id="passwordInput" placeholder="Password" onkeydown="if(event.key==='Enter')login()" autofocus />
+    <button class="btn btn-primary" style="width:100%" onclick="login()">Accedi</button>
+  </div>
+</div>
+
+<!-- ── APP ── -->
+<div id="adminApp">
+
+  <header class="admin-header">
+    <div class="admin-header-logo">
+      La Dimora dei Ricordi
+      <span>Pannello Admin</span>
+    </div>
+    <button class="btn-logout" onclick="logout()">Esci</button>
+  </header>
+
+  <div class="admin-body">
+
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <p class="sidebar-label">Gestione</p>
+      <div class="nav-item active" onclick="showPanel('dashboard')">
+        <span class="nav-icon">🏠</span> Dashboard
+      </div>
+      <div class="nav-item" onclick="showPanel('foto')">
+        <span class="nav-icon">📷</span> Foto & Video
+      </div>
+      <div class="nav-item" onclick="showPanel('pacchetti')">
+        <span class="nav-icon">📦</span> Pacchetti
+      </div>
+      <div class="nav-item" onclick="showPanel('extras')">
+        <span class="nav-icon">➕</span> Aggiunte
+      </div>
+      <p class="sidebar-label">Testi</p>
+      <div class="nav-item" onclick="showPanel('hero')">
+        <span class="nav-icon">✏️</span> Hero & Intro
+      </div>
+      <div class="nav-item" onclick="showPanel('contatti')">
+        <span class="nav-icon">📞</span> Contatti
+      </div>
+    </nav>
+
+    <!-- Content -->
+    <main class="content">
+
+      <!-- DASHBOARD -->
+      <div class="panel active" id="panel-dashboard">
+        <p class="panel-title">Benvenuta 👋</p>
+        <p class="panel-sub">Cosa vuoi gestire oggi?</p>
+
+        <a href="/" target="_blank" class="link-sito">
+          🔗 Vedi il sito pubblico
+        </a>
+
+        <div class="stats-row">
+          <div class="stat-card">
+            <p class="stat-val" id="statFoto">—</p>
+            <p class="stat-lbl">Foto nel portfolio</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-val" id="statVideo">—</p>
+            <p class="stat-lbl">Video nel portfolio</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-val" id="statPacchetti">3</p>
+            <p class="stat-lbl">Pacchetti attivi</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <p class="card-title">Accesso rapido</p>
+          <div style="display:flex;gap:0.8rem;flex-wrap:wrap">
+            <button class="btn btn-primary" onclick="showPanel('foto')">📷 Carica foto</button>
+            <button class="btn btn-primary" onclick="showPanel('pacchetti')">📦 Modifica prezzi</button>
+            <button class="btn btn-primary" onclick="showPanel('contatti')">📞 Aggiorna contatti</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOTO & VIDEO -->
+      <div class="panel" id="panel-foto">
+        <p class="panel-title">Foto & Video</p>
+        <p class="panel-sub">Carica nuove immagini o gestisci quelle esistenti.</p>
+
+        <div class="card">
+          <p class="card-title">Carica nuovi file</p>
+
+          <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()"
+               ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dropFile(event)">
+            <input type="file" id="fileInput" accept="image/*,video/*" multiple onchange="handleFileSelect(event)" />
+            <div class="upload-icon">📁</div>
+            <p class="upload-text"><strong>Clicca per caricare</strong> o trascina qui le foto</p>
+            <p class="upload-text" style="font-size:0.78rem;margin-top:0.3rem">JPG, PNG, WebP · Max 10MB per file</p>
+          </div>
+
+          <div class="upload-meta">
+            <div class="form-group" style="margin:0">
+              <label>Categoria</label>
+              <select id="uploadCategoria">
+                <option value="foto">Fotografia</option>
+                <option value="video">Video (thumbnail)</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin:0">
+              <label>Didascalia / Luogo</label>
+              <input type="text" id="uploadDidascalia" placeholder="es. Matrimonio · Pesaro" />
+            </div>
+            <div class="form-group" style="margin:0">
+              <label>Anno</label>
+              <input type="text" id="uploadAnno" placeholder="2025" value="2025" />
+            </div>
+          </div>
+
+          <div class="upload-progress" id="uploadProgress">
+            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+            <p class="progress-text" id="progressText">Caricamento in corso…</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+            <p class="card-title" style="margin:0;border:none;padding:0">Foto nel portfolio</p>
+            <div style="display:flex;gap:0.5rem">
+              <button class="btn btn-sm" style="background:var(--brown);color:white" onclick="filtraFoto('foto')">Foto</button>
+              <button class="btn btn-sm" style="background:var(--border);color:var(--brown)" onclick="filtraFoto('video')">Video</button>
+            </div>
+          </div>
+          <div class="foto-grid" id="fotoGrid">
+            <p style="color:var(--gray);font-size:0.88rem">Caricamento…</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PACCHETTI -->
+      <div class="panel" id="panel-pacchetti">
+        <p class="panel-title">Pacchetti & Prezzi</p>
+        <p class="panel-sub">Modifica i prezzi e i dettagli dei pacchetti. Le modifiche appaiono subito sul sito.</p>
+        <div id="pacchettiEditor"></div>
+        <button class="btn btn-primary" onclick="salvaPacchetti()">💾 Salva modifiche</button>
+      </div>
+
+      <!-- EXTRAS -->
+      <div class="panel" id="panel-extras">
+        <p class="panel-title">Aggiunte Opzionali</p>
+        <p class="panel-sub">Gestisci la lista degli extra (album, USB, stampe…).</p>
+        <div class="card">
+          <p class="card-title">Lista aggiunte</p>
+          <div id="extrasEditor"></div>
+          <button class="btn-add-feature" onclick="aggiungiExtra()">+ Aggiungi voce</button>
+        </div>
+        <button class="btn btn-primary" style="margin-top:1rem" onclick="salvaExtras()">💾 Salva modifiche</button>
+      </div>
+
+      <!-- HERO -->
+      <div class="panel" id="panel-hero">
+        <p class="panel-title">Testi Hero & Intro</p>
+        <p class="panel-sub">Modifica il testo principale della pagina.</p>
+        <div class="card">
+          <p class="card-title">Sezione Hero (in cima)</p>
+          <div class="form-group">
+            <label>Titolo principale</label>
+            <input type="text" id="heroTitolo" />
+          </div>
+          <div class="form-group">
+            <label>Sottotitolo</label>
+            <input type="text" id="heroSottotitolo" />
+          </div>
+          <div class="form-group">
+            <label>Zona geografica</label>
+            <input type="text" id="heroZona" />
+          </div>
+        </div>
+        <div class="card">
+          <p class="card-title">Sezione Chi siamo</p>
+          <div class="form-group">
+            <label>Titolo</label>
+            <input type="text" id="aboutTitolo" />
+          </div>
+          <div class="form-group">
+            <label>Paragrafo 1</label>
+            <textarea id="aboutTesto1" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Paragrafo 2</label>
+            <textarea id="aboutTesto2" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Zona / copertura</label>
+            <input type="text" id="aboutZona" />
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="salvaHero()">💾 Salva testi</button>
+      </div>
+
+      <!-- CONTATTI -->
+      <div class="panel" id="panel-contatti">
+        <p class="panel-title">Contatti</p>
+        <p class="panel-sub">Aggiorna email, telefoni e link social.</p>
+        <div class="card">
+          <p class="card-title">Dati di contatto</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" id="cEmail" />
+            </div>
+            <div class="form-group">
+              <label>Numero WhatsApp (con prefisso, senza +)</label>
+              <input type="text" id="cWhatsapp" placeholder="393271867329" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Telefono 1 (Francesco)</label>
+              <input type="text" id="cTel1" />
+            </div>
+            <div class="form-group">
+              <label>Telefono 2 (Noemi)</label>
+              <input type="text" id="cTel2" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Testo sotto il titolo contatti</label>
+            <textarea id="cTesto" rows="2"></textarea>
+          </div>
+        </div>
+        <div class="card">
+          <p class="card-title">Link social</p>
+          <div class="form-group">
+            <label>Instagram (URL completo)</label>
+            <input type="url" id="cInstagram" />
+          </div>
+          <div class="form-group">
+            <label>YouTube (URL completo)</label>
+            <input type="url" id="cYoutube" />
+          </div>
+          <div class="form-group">
+            <label>Matrimonio.com (URL completo)</label>
+            <input type="url" id="cMatrimonio" />
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="salvaContatti()">💾 Salva contatti</button>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ── AUTH ──────────────────────────────────────────────────────
+let token = sessionStorage.getItem('admin_token') || '';
+let contenuti = {};
+
+async function login() {
+  const pw = document.getElementById('passwordInput').value;
+  const err = document.getElementById('loginError');
+  err.style.display = 'none';
+
+  try {
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pw }),
+    });
+    const data = await res.json();
+    if (data.ok) {
+      token = data.token;
+      sessionStorage.setItem('admin_token', token);
+      avviaAdmin();
+    } else {
+      err.style.display = 'block';
+    }
+  } catch (e) {
+    err.textContent = 'Errore di connessione. Riprova.';
+    err.style.display = 'block';
+  }
+}
+
+function logout() {
+  sessionStorage.removeItem('admin_token');
+  token = '';
+  document.getElementById('adminApp').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+}
+
+function avviaAdmin() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('adminApp').style.display = 'block';
+  caricaTutto();
+}
+
+// Controlla se già loggato
+if (token) avviaAdmin();
+
+// ── API ───────────────────────────────────────────────────────
+async function api(path, method = 'GET', body = null) {
+  const opts = {
+    method,
+    headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+  };
+  if (body) opts.body = JSON.stringify(body);
+  const res = await fetch('/api/' + path, opts);
+  if (res.status === 401) { logout(); return null; }
+  return res.json();
+}
+
+// ── TOAST ─────────────────────────────────────────────────────
+function toast(msg, type = '') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'show ' + type;
+  setTimeout(() => { el.className = ''; }, 3000);
+}
+
+// ── NAVIGAZIONE ───────────────────────────────────────────────
+function showPanel(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  document.querySelector(`[onclick="showPanel('${id}')"]`).classList.add('active');
+}
+
+// ── CARICA TUTTO ──────────────────────────────────────────────
+async function caricaTutto() {
+  const [cont, foto] = await Promise.all([
+    api('contenuti'),
+    api('foto'),
+  ]);
+
+  if (cont) {
+    contenuti = cont;
+    popolaFormulari(cont);
+  }
+
+  if (foto) {
+    renderFotoGrid(foto);
+    const nFoto  = foto.filter(f => f.categoria === 'foto').length;
+    const nVideo = foto.filter(f => f.categoria === 'video').length;
+    document.getElementById('statFoto').textContent  = nFoto;
+    document.getElementById('statVideo').textContent = nVideo;
+  }
+}
+
+// ── POPOLA FORMULARI ──────────────────────────────────────────
+function popolaFormulari(d) {
+  // Hero
+  if (d.hero) {
+    document.getElementById('heroTitolo').value       = d.hero.titolo || '';
+    document.getElementById('heroSottotitolo').value  = d.hero.sottotitolo || '';
+    document.getElementById('heroZona').value         = d.hero.zona || '';
+  }
+  // About
+  if (d.about) {
+    document.getElementById('aboutTitolo').value = d.about.titolo || '';
+    document.getElementById('aboutTesto1').value = d.about.testo1 || '';
+    document.getElementById('aboutTesto2').value = d.about.testo2 || '';
+    document.getElementById('aboutZona').value   = d.about.zona || '';
+  }
+  // Contatti
+  if (d.contatti) {
+    const c = d.contatti;
+    document.getElementById('cEmail').value      = c.email || '';
+    document.getElementById('cWhatsapp').value   = c.whatsapp || '';
+    document.getElementById('cTel1').value       = c.tel1 || '';
+    document.getElementById('cTel2').value       = c.tel2 || '';
+    document.getElementById('cTesto').value      = c.testo || '';
+    document.getElementById('cInstagram').value  = c.instagram || '';
+    document.getElementById('cYoutube').value    = c.youtube || '';
+    document.getElementById('cMatrimonio').value = c.matrimonioCom || '';
+  }
+  // Pacchetti
+  if (d.pacchetti) renderPacchettiEditor(d.pacchetti);
+  // Extras
+  if (d.extras) renderExtrasEditor(d.extras);
+}
+
+// ── FOTO GRID ─────────────────────────────────────────────────
+let tutteleFoto = [];
+let filtroCorrente = 'foto';
+
+function renderFotoGrid(lista) {
+  tutteleFoto = lista;
+  filtraFoto(filtroCorrente);
+}
+
+function filtraFoto(cat) {
+  filtroCorrente = cat;
+  const grid = document.getElementById('fotoGrid');
+  const filtrate = tutteleFoto.filter(f => f.categoria === cat);
+
+  if (filtrate.length === 0) {
+    grid.innerHTML = `<p style="color:var(--gray);font-size:0.88rem;grid-column:1/-1">
+      Nessun file nella categoria "${cat}". Carica qualcosa sopra!
+    </p>`;
+    return;
+  }
+
+  grid.innerHTML = filtrate.map(f => `
+    <div class="foto-item">
+      ${f.url
+        ? `<img src="${f.url}" alt="${f.didascalia}" loading="lazy" />`
+        : `<div class="foto-placeholder">🖼️</div>`}
+      <span class="foto-item-badge">${f.categoria}</span>
+      <div class="foto-item-overlay">
+        <p class="foto-item-caption">${f.didascalia || '—'} ${f.anno ? '· ' + f.anno : ''}</p>
+        <button class="btn btn-danger btn-sm" onclick="eliminaFoto('${f.id}')">🗑 Elimina</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function eliminaFoto(id) {
+  if (!confirm('Eliminare questa foto dal portfolio?')) return;
+  const res = await fetch('/api/foto/' + id, {
+    method: 'DELETE',
+    headers: { 'Authorization': 'Bearer ' + token },
+  });
+  const data = await res.json();
+  if (data.ok) {
+    tutteleFoto = tutteleFoto.filter(f => f.id !== id);
+    filtraFoto(filtroCorrente);
+    toast('Foto eliminata ✓', 'success');
+    aggiornaStats();
+  } else {
+    toast('Errore nell\'eliminazione', 'error');
+  }
+}
+
+function aggiornaStats() {
+  document.getElementById('statFoto').textContent  = tutteleFoto.filter(f => f.categoria === 'foto').length;
+  document.getElementById('statVideo').textContent = tutteleFoto.filter(f => f.categoria === 'video').length;
+}
+
+// ── UPLOAD ────────────────────────────────────────────────────
+function dragOver(e) { e.preventDefault(); document.getElementById('uploadZone').classList.add('dragover'); }
+function dragLeave()  { document.getElementById('uploadZone').classList.remove('dragover'); }
+function dropFile(e)  { e.preventDefault(); dragLeave(); uploadFiles(e.dataTransfer.files); }
+function handleFileSelect(e) { uploadFiles(e.target.files); }
+
+async function uploadFiles(files) {
+  if (!files.length) return;
+  const progressWrap = document.getElementById('uploadProgress');
+  const progressFill = document.getElementById('progressFill');
+  const progressText = document.getElementById('progressText');
+
+  progressWrap.classList.add('show');
+
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    progressText.textContent = `Caricamento ${i + 1} di ${files.length}: ${file.name}`;
+    progressFill.style.width = ((i / files.length) * 100) + '%';
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('categoria', document.getElementById('uploadCategoria').value);
+    formData.append('didascalia', document.getElementById('uploadDidascalia').value);
+    formData.append('anno', document.getElementById('uploadAnno').value);
+
+    try {
+      const res = await fetch('/api/foto/upload', {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + token },
+        body: formData,
+      });
+      const data = await res.json();
+      if (data.ok) tutteleFoto.unshift(data.foto);
+    } catch (e) {
+      toast(`Errore caricando ${file.name}`, 'error');
+    }
+  }
+
+  progressFill.style.width = '100%';
+  progressText.textContent = 'Completato!';
+  setTimeout(() => progressWrap.classList.remove('show'), 2000);
+
+  filtraFoto(filtroCorrente);
+  aggiornaStats();
+  toast(`${files.length} file caricati ✓`, 'success');
+  document.getElementById('fileInput').value = '';
+}
+
+// ── PACCHETTI EDITOR ──────────────────────────────────────────
+function renderPacchettiEditor(pacchetti) {
+  const el = document.getElementById('pacchettiEditor');
+  el.innerHTML = pacchetti.map((p, pi) => `
+    <div class="pacchetto-editor ${p.evidenziato ? 'evidenziato' : ''}">
+      <div class="pacchetto-header">
+        <span class="pacchetto-nome">${p.icona} ${p.nome}</span>
+        <label style="font-size:0.8rem;display:flex;align-items:center;gap:0.4rem;cursor:pointer">
+          <input type="checkbox" ${p.evidenziato ? 'checked' : ''} onchange="toggleEvidenziato(${pi})" />
+          Più scelto
+        </label>
+      </div>
+      <div class="form-row">
+        <div class="form-group" style="margin:0">
+          <label>Icona (emoji)</label>
+          <input type="text" value="${p.icona}" onchange="aggiornaPacchetto(${pi}, 'icona', this.value)" style="font-size:1.2rem" />
+        </div>
+        <div class="form-group" style="margin:0">
+          <label>Nome pacchetto</label>
+          <input type="text" value="${p.nome}" onchange="aggiornaPacchetto(${pi}, 'nome', this.value)" />
+        </div>
+        <div class="form-group" style="margin:0">
+          <label>Prezzo</label>
+          <input type="text" value="${p.prezzo}" onchange="aggiornaPacchetto(${pi}, 'prezzo', this.value)" placeholder="es. 800€" />
+        </div>
+      </div>
+      <div class="features-list" id="features-${pi}">
+        ${p.features.map((f, fi) => `
+          <div class="feature-item">
+            <input type="text" value="${f}"
+              onchange="aggiornaFeature(${pi}, ${fi}, this.value)"
+              placeholder="Voce inclusa…" />
+            <button class="btn btn-danger btn-sm" onclick="rimuoviFeature(${pi}, ${fi})">✕</button>
+          </div>`).join('')}
+      </div>
+      <button class="btn-add-feature" onclick="aggiungiFeature(${pi})">+ Aggiungi voce inclusa</button>
+    </div>
+  `).join('');
+}
+
+function aggiornaPacchetto(pi, campo, val) {
+  contenuti.pacchetti[pi][campo] = val;
+}
+function toggleEvidenziato(pi) {
+  contenuti.pacchetti[pi].evidenziato = !contenuti.pacchetti[pi].evidenziato;
+  renderPacchettiEditor(contenuti.pacchetti);
+}
+function aggiornaFeature(pi, fi, val) {
+  contenuti.pacchetti[pi].features[fi] = val;
+}
+function aggiungiFeature(pi) {
+  contenuti.pacchetti[pi].features.push('Nuova voce');
+  renderPacchettiEditor(contenuti.pacchetti);
+}
+function rimuoviFeature(pi, fi) {
+  contenuti.pacchetti[pi].features.splice(fi, 1);
+  renderPacchettiEditor(contenuti.pacchetti);
+}
+async function salvaPacchetti() {
+  contenuti.pacchetti = leggiPacchettiDalDOM();
+  await api('contenuti', 'PUT', contenuti);
+  toast('Pacchetti salvati ✓', 'success');
+}
+function leggiPacchettiDalDOM() {
+  // I valori sono già sincronizzati in contenuti.pacchetti dagli onchange
+  return contenuti.pacchetti;
+}
+
+// ── EXTRAS EDITOR ─────────────────────────────────────────────
+function renderExtrasEditor(extras) {
+  const el = document.getElementById('extrasEditor');
+  el.innerHTML = extras.map((e, i) => `
+    <div class="extra-editor">
+      <div class="form-group" style="margin:0">
+        <label>Nome</label>
+        <input type="text" value="${e.nome}" onchange="contenuti.extras[${i}].nome=this.value" />
+      </div>
+      <div class="form-group" style="margin:0">
+        <label>Descrizione</label>
+        <input type="text" value="${e.desc}" onchange="contenuti.extras[${i}].desc=this.value" />
+      </div>
+      <div class="form-group" style="margin:0">
+        <label>Prezzo</label>
+        <input type="text" value="${e.prezzo}" onchange="contenuti.extras[${i}].prezzo=this.value" />
+      </div>
+      <button class="btn btn-danger" style="margin-top:1.4rem" onclick="rimuoviExtra(${i})">✕</button>
+    </div>
+  `).join('');
+}
+function aggiungiExtra() {
+  contenuti.extras.push({ nome: 'Nuovo extra', desc: 'Descrizione', prezzo: '0€' });
+  renderExtrasEditor(contenuti.extras);
+}
+function rimuoviExtra(i) {
+  contenuti.extras.splice(i, 1);
+  renderExtrasEditor(contenuti.extras);
+}
+async function salvaExtras() {
+  await api('contenuti', 'PUT', contenuti);
+  toast('Aggiunte salvate ✓', 'success');
+}
+
+// ── SALVA HERO ────────────────────────────────────────────────
+async function salvaHero() {
+  contenuti.hero = {
+    titolo:      document.getElementById('heroTitolo').value,
+    sottotitolo: document.getElementById('heroSottotitolo').value,
+    zona:        document.getElementById('heroZona').value,
+  };
+  contenuti.about = {
+    titolo: document.getElementById('aboutTitolo').value,
+    testo1: document.getElementById('aboutTesto1').value,
+    testo2: document.getElementById('aboutTesto2').value,
+    zona:   document.getElementById('aboutZona').value,
+  };
+  await api('contenuti', 'PUT', contenuti);
+  toast('Testi salvati ✓', 'success');
+}
+
+// ── SALVA CONTATTI ────────────────────────────────────────────
+async function salvaContatti() {
+  contenuti.contatti = {
+    email:        document.getElementById('cEmail').value,
+    whatsapp:     document.getElementById('cWhatsapp').value,
+    tel1:         document.getElementById('cTel1').value,
+    tel1Label:    'Francesco',
+    tel2:         document.getElementById('cTel2').value,
+    tel2Label:    'Noemi',
+    testo:        document.getElementById('cTesto').value,
+    instagram:    document.getElementById('cInstagram').value,
+    youtube:      document.getElementById('cYoutube').value,
+    matrimonioCom: document.getElementById('cMatrimonio').value,
+  };
+  await api('contenuti', 'PUT', contenuti);
+  toast('Contatti salvati ✓', 'success');
+}
+</script>
+</body>
+</html>
