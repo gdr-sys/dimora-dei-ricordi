@@ -1,19 +1,48 @@
 // ============================================================
-// SCRIPT PRINCIPALE — La Dimora dei Ricordi
-// Carica contenuti dinamici dall'API + gestisce interattività
+// CURSORE PERSONALIZZATO
 // ============================================================
+const cursor = document.getElementById('cursor');
+const follower = document.getElementById('cursor-follower');
+let fx = 0, fy = 0, cx = 0, cy = 0;
 
+if (cursor && window.matchMedia('(pointer: fine)').matches) {
+  document.addEventListener('mousemove', e => {
+    cx = e.clientX; cy = e.clientY;
+    cursor.style.left = cx + 'px';
+    cursor.style.top  = cy + 'px';
+  });
+  function animFollower() {
+    fx += (cx - fx) * 0.12;
+    fy += (cy - fy) * 0.12;
+    follower.style.left = fx + 'px';
+    follower.style.top  = fy + 'px';
+    requestAnimationFrame(animFollower);
+  }
+  animFollower();
+
+  document.querySelectorAll('a, button, .ptab, .pack-card, .pi, .servizio-card').forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+  });
+}
+
+// ============================================================
 // NAV SCROLL
+// ============================================================
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive: true });
 
+// ============================================================
 // MOBILE MENU
+// ============================================================
 function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
 function closeMenu()  { document.getElementById('navLinks').classList.remove('open'); }
 
+// ============================================================
 // ACTIVE NAV LINK
+// ============================================================
 const sections = document.querySelectorAll('section[id]');
 window.addEventListener('scroll', () => {
   const y = window.scrollY + 100;
@@ -27,150 +56,107 @@ window.addEventListener('scroll', () => {
   });
 }, { passive: true });
 
-// SCROLL REVEAL
-function initReveal() {
-  const els = document.querySelectorAll(
-    '.about-photo-wrap, .about-text, .servizio-card, ' +
-    '.section-header, .port-tabs, .pi, .pack-card, ' +
-    '.contact-info, .contact-form, .extras-wrap'
-  );
-  els.forEach(el => el.classList.add('reveal'));
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-  els.forEach(el => obs.observe(el));
+// ============================================================
+// PARALLAX HERO
+// ============================================================
+const heroBg = document.querySelector('.hero-photo');
+if (heroBg && window.matchMedia('(pointer: fine)').matches) {
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    heroBg.style.transform = `translateY(${y * 0.3}px)`;
+  }, { passive: true });
 }
 
-// PORTFOLIO FILTER
-let fotoCorrenti = { foto: [], video: [] };
+// ============================================================
+// NUMERI ANIMATI
+// ============================================================
+function animateCount(el) {
+  const target = parseInt(el.dataset.target);
+  const duration = 1800;
+  const start = performance.now();
+  function step(now) {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(ease * target) + (target >= 100 ? '+' : '');
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
 
+const numeriObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.numero-val').forEach(animateCount);
+      numeriObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+const numeriSection = document.getElementById('numeri');
+if (numeriSection) numeriObs.observe(numeriSection);
+
+// ============================================================
+// SCROLL REVEAL
+// ============================================================
+const revealEls = document.querySelectorAll(
+  '.about-photo-wrap, .about-text, .servizio-card, ' +
+  '.section-header, .port-tabs, .pi, .pack-card, ' +
+  '.extras-wrap, .contact-info, .contact-form, .numero-item'
+);
+revealEls.forEach(el => el.classList.add('reveal'));
+
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 60);
+      revObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+revealEls.forEach(el => revObs.observe(el));
+
+// ============================================================
+// PORTFOLIO FILTER
+// ============================================================
 function filterPort(cat, btn) {
   document.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
-  renderPortfolioItems(fotoCorrenti[cat] || [], cat);
-}
-
-function renderPortfolioItems(items, cat) {
-  const grid = document.getElementById('portGrid');
-  grid.innerHTML = '';
-
-  if (items.length === 0) {
-    grid.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:var(--gray);padding:3rem 0">
-      Nessuna ${cat === 'foto' ? 'foto' : 'video'} ancora caricata.
-    </p>`;
-    return;
-  }
-
-  items.forEach((item, i) => {
-    const div = document.createElement('div');
-    div.className = 'pi' + (i === 0 ? ' wide' : '');
-    div.dataset.cat = cat;
-
-    if (cat === 'video') {
-      div.innerHTML = `
-        <div class="pimg vthumb" style="background:#0d0a08">
-          <div class="play">▶</div>
-          <span class="vlabel">${item.didascalia || 'Video'}</span>
-        </div>
-        <div class="pcap"><span>${item.didascalia || ''}</span><span>${item.anno || ''}</span></div>`;
+  document.querySelectorAll('.pi').forEach((item, i) => {
+    if (item.dataset.cat === cat) {
+      item.classList.remove('hidden');
+      item.style.opacity = '0';
+      item.style.transform = 'translateY(12px)';
+      setTimeout(() => {
+        item.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+        item.style.opacity = '1';
+        item.style.transform = 'translateY(0)';
+      }, i * 60);
     } else {
-      div.innerHTML = `
-        <img class="pimg" src="${item.url}" alt="${item.didascalia || 'Foto evento'}" loading="lazy" />
-        <div class="pcap"><span>${item.didascalia || ''}</span><span>${item.anno || ''}</span></div>`;
+      item.classList.add('hidden');
     }
-    grid.appendChild(div);
   });
 }
 
-// CARICA CONTENUTI DAL SERVER
-async function caricaContenuti() {
-  try {
-    const res = await fetch('/api/contenuti');
-    if (!res.ok) return; // usa i contenuti statici già nell'HTML
-    const dati = await res.json();
-    applicaContenuti(dati);
-  } catch (e) {
-    // Silenzioso — l'HTML statico è già visibile
-  }
-}
+// ============================================================
+// SHINE EFFECT SUI PACCHETTI
+// ============================================================
+document.querySelectorAll('.pack-img').forEach(img => {
+  const shine = document.createElement('div');
+  shine.className = 'shine';
+  img.appendChild(shine);
+});
 
-async function caricaFoto() {
-  try {
-    const res = await fetch('/api/foto');
-    if (!res.ok) return;
-    const lista = await res.json();
-    fotoCorrenti.foto  = lista.filter(f => f.categoria === 'foto');
-    fotoCorrenti.video = lista.filter(f => f.categoria === 'video');
-
-    // Mostra categoria attiva
-    const tabAttivo = document.querySelector('.ptab.active');
-    const cat = tabAttivo ? (tabAttivo.textContent.toLowerCase().includes('video') ? 'video' : 'foto') : 'foto';
-    if (fotoCorrenti[cat].length > 0) renderPortfolioItems(fotoCorrenti[cat], cat);
-  } catch (e) {}
-}
-
-function applicaContenuti(d) {
-  // Hero
-  if (d.hero) {
-    const t = document.querySelector('.hero-title');
-    if (t && d.hero.titolo) t.innerHTML = d.hero.titolo.replace(/(merita.*$)/s, '<em>$1</em>');
-    const s = document.querySelector('.hero-sub');
-    if (s && d.hero.sottotitolo) s.textContent = d.hero.sottotitolo;
-    const z = document.querySelector('.hero-eyebrow');
-    if (z && d.hero.zona) z.textContent = '📷 ' + d.hero.zona;
-  }
-
-  // Pacchetti
-  if (d.pacchetti) {
-    const grid = document.querySelector('.pack-grid');
-    if (grid) {
-      grid.innerHTML = d.pacchetti.map(p => `
-        <div class="pack-card ${p.evidenziato ? 'featured' : ''}">
-          ${p.evidenziato ? '<p class="pack-badge">Più scelto</p>' : ''}
-          <div class="pack-icon">${p.icona}</div>
-          <p class="pack-name">${p.nome}</p>
-          <p class="pack-price"><strong>${p.prezzo}</strong></p>
-          <ul class="pack-features">
-            ${p.features.map(f => `<li>${f}</li>`).join('')}
-          </ul>
-          <a href="#contatti" class="${p.evidenziato ? 'btn-primary-dark' : 'btn-outline-dark'}">Richiedi info</a>
-        </div>`).join('');
-    }
-  }
-
-  // Extras
-  if (d.extras) {
-    const grid = document.querySelector('.extras-grid');
-    if (grid) {
-      grid.innerHTML = d.extras.map(e => `
-        <div class="extra-item ${e.prezzo.includes('Gratis') ? 'highlight' : ''}">
-          <span class="extra-name">${e.nome}</span>
-          <span class="extra-desc">${e.desc}</span>
-          <span class="extra-price">${e.prezzo}</span>
-        </div>`).join('');
-    }
-  }
-
-  // Contatti
-  if (d.contatti) {
-    const c = d.contatti;
-    const wa = document.querySelector('.whatsapp-big');
-    if (wa) wa.href = `https://wa.me/${c.whatsapp}?text=Ciao!%20Ho%20visto%20il%20vostro%20sito%20e%20vorrei%20avere%20informazioni.`;
-    const waHero = document.querySelector('.btn-whatsapp');
-    if (waHero) waHero.href = `https://wa.me/${c.whatsapp}?text=Ciao!%20Ho%20visto%20il%20vostro%20sito%20e%20vorrei%20avere%20informazioni.`;
-  }
-}
-
+// ============================================================
 // FORM CONTATTI
+// ============================================================
 async function handleSubmit(e) {
   e.preventDefault();
   const btn = e.target.querySelector('.btn-submit');
   const success = document.getElementById('fsuccess');
   btn.textContent = 'Invio in corso…';
   btn.disabled = true;
-  // Collega Formspree qui (vedi README)
+  // Collega Formspree: sostituisci l'URL con il tuo endpoint
+  // const res = await fetch('https://formspree.io/f/TUOID', { method:'POST', headers:{'Accept':'application/json'}, body: new FormData(e.target) });
   setTimeout(() => {
     success.classList.remove('hidden');
     e.target.reset();
@@ -180,9 +166,78 @@ async function handleSubmit(e) {
   }, 1000);
 }
 
-// AVVIO
-document.addEventListener('DOMContentLoaded', () => {
-  caricaContenuti();
-  caricaFoto();
-  initReveal();
-});
+// ============================================================
+// CAROSELLO RECENSIONI
+// ============================================================
+(function() {
+  const track   = document.getElementById('recTrack');
+  const dotsEl  = document.getElementById('recDots');
+  if (!track) return;
+
+  const cards = track.querySelectorAll('.rec-card');
+  let current = 0;
+  let timer;
+  let perView = getPerView();
+
+  function getPerView() {
+    if (window.innerWidth <= 900)  return 1;
+    if (window.innerWidth <= 1100) return 2;
+    return 3;
+  }
+
+  const total = Math.ceil(cards.length / perView);
+
+  // Crea puntini
+  for (let i = 0; i < total; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'rec-dot' + (i === 0 ? ' active' : '');
+    btn.setAttribute('aria-label', 'Vai alla recensione ' + (i + 1));
+    btn.addEventListener('click', () => { goTo(i); resetTimer(); });
+    dotsEl.appendChild(btn);
+  }
+
+  function goTo(idx) {
+    current = (idx + total) % total;
+    const cardWidth = cards[0].offsetWidth + 24; // gap 1.5rem = 24px
+    track.style.transform = `translateX(-${current * perView * cardWidth}px)`;
+    dotsEl.querySelectorAll('.rec-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  function next() { goTo(current + 1); }
+
+  function startTimer() { timer = setInterval(next, 4500); }
+  function resetTimer() { clearInterval(timer); startTimer(); }
+
+  // Pausa su hover
+  track.addEventListener('mouseenter', () => clearInterval(timer));
+  track.addEventListener('mouseleave', () => startTimer());
+
+  // Touch swipe
+  let touchX = 0;
+  track.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const diff = touchX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) { diff > 0 ? goTo(current + 1) : goTo(current - 1); resetTimer(); }
+  }, { passive: true });
+
+  // Resize
+  window.addEventListener('resize', () => {
+    perView = getPerView();
+    goTo(current);
+  });
+
+  startTimer();
+})();
+
+// Frecce manuali
+function moveCarousel(dir) {
+  const track = document.getElementById('recTrack');
+  const dots   = document.querySelectorAll('.rec-dot');
+  const total  = dots.length;
+  let current  = [...dots].findIndex(d => d.classList.contains('active'));
+  current = (current + dir + total) % total;
+  const perView = window.innerWidth <= 900 ? 1 : window.innerWidth <= 1100 ? 2 : 3;
+  const cardWidth = track.querySelector('.rec-card').offsetWidth + 24;
+  track.style.transform = `translateX(-${current * perView * cardWidth}px)`;
+  dots.forEach((d, i) => d.classList.toggle('active', i === current));
+}
