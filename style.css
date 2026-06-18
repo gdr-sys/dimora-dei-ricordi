@@ -141,7 +141,10 @@ body.cursor-hover #cursor-follower { width: 50px; height: 50px; border-color: va
 .hero-bg { position: absolute; inset: 0; }
 .hero-photo {
   position: absolute; inset: -10%;
-  background: linear-gradient(160deg, #1e1008 0%, #2d1a0e 20%, #3a2215 45%, #2a1a0c 70%, #1a0e06 100%);
+  background-color: #1e1008;
+  background-image: url('foto/hero.jpg'); /* ← sostituisci con la tua foto */
+  background-size: cover;
+  background-position: center top;
   transition: transform 0.05s linear;
 }
 .hero-photo::before {
@@ -152,7 +155,9 @@ body.cursor-hover #cursor-follower { width: 50px; height: 50px; border-color: va
 }
 .hero-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(28,14,6,0.85) 0%, rgba(28,14,6,0.3) 55%, rgba(28,14,6,0.1) 100%);
+  background:
+    linear-gradient(to top, rgba(15,8,3,0.92) 0%, rgba(15,8,3,0.55) 45%, rgba(15,8,3,0.25) 100%),
+    linear-gradient(to right, rgba(15,8,3,0.3) 0%, transparent 60%);
 }
 .hero-content { position: relative; z-index: 2; max-width: 660px; }
 .hero-eyebrow {
@@ -773,3 +778,31 @@ footer { background: var(--brown); color: var(--gray); padding: clamp(2.5rem, 5v
 @media (min-width: 901px) and (max-width: 1100px) {
   .rec-card { flex: 0 0 calc(50% - 0.75rem); }
 }
+
+/* ============================================================
+   TORNA SU
+   ============================================================ */
+#backTop {
+  position: fixed;
+  bottom: 2rem; right: 2rem;
+  width: 46px; height: 46px;
+  background: var(--rose);
+  color: var(--white);
+  border: none;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  opacity: 0; transform: translateY(12px);
+  transition: opacity 0.3s, transform 0.3s, background 0.3s, box-shadow 0.3s;
+  z-index: 150;
+  box-shadow: 0 4px 16px rgba(196,150,122,0.4);
+}
+#backTop.visible { opacity: 1; transform: translateY(0); }
+#backTop:hover { background: var(--rose-dk); box-shadow: 0 8px 24px rgba(196,150,122,0.5); transform: translateY(-2px); }
+
+/* ============================================================
+   HERO CON FOTO
+   ============================================================ */
+/* Quando aggiungi la foto, decommenta e modifica questa riga in index.html:
+   .hero-photo { background-image: url('foto/hero.jpg'); background-size: cover; background-position: center; }
+   Nel CSS qui sotto è già pronto — basta aggiungere la tua foto */
