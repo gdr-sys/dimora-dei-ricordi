@@ -492,6 +492,14 @@ h2 em { font-style: italic; color: var(--rose); }
 .pack-features li { font-size: 0.82rem; color: rgba(250,246,241,0.6); padding-left: 1.1rem; position: relative; }
 .pack-features li::before { content: '—'; position: absolute; left: 0; color: var(--rose); font-size: 0.65rem; top: 0.3em; }
 
+/* Bottone sempre visibile, non solo su hover */
+.pack-body .btn-outline-dark,
+.pack-body .btn-primary-dark {
+  display: block;
+  text-align: center;
+  margin-top: auto;
+}
+
 /* EXTRAS */
 .extras-wrap { max-width: 1020px; margin: 3.5rem auto 0; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 2.5rem; }
 .extras-title { font-family: var(--font-d); font-size: 1.2rem; font-weight: 400; color: var(--cream); letter-spacing: 0.06em; margin-bottom: 1.5rem; text-align: center; }
